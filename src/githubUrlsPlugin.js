@@ -48,13 +48,15 @@ export function githubUrlsPlugin (hubpress) {
       getPostUrl:  postName => postName.replace(/([\d]{4})-([\d]{2})-([\d]{2})-([\w-]*)\.adoc/, '/$1/$2/$3/$4.html'),
       getPostGhPath: postName => postName.replace(/([\d]{4})-([\d]{2})-([\d]{2})-([\w-]*)\.adoc/, '$1/$2/$3/$4.html'),
       getSiteUrl: getSiteUrl
-    }
+    };
   }
 
   hubpress.on('receiveConfig', function (opts) {
+    console.info('Github Urls Plugin - receiveConfig');
+    console.log('receiveConfig', opts);
     const urls = build(opts.data.config);
     const mergeConfig = Object.assign({}, opts.data.config, {urls});
     const data = Object.assign({}, opts.data, {config: mergeConfig});
     return Object.assign({}, opts, {data});
-  })
+  });
 }
